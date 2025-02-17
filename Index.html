@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شركة النخيل لنقل العفش | السعودية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+:root {
+    --main-color: #2ecc71; /* الأخضر الفاتح */
+    --secondary-color: #27ae60;
+    --whatsapp-color: #25D366;
+    --text-color: #2c3e50;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+    background: #f4f4f4;
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+/* الأزرار الثابتة */
+.fixed-buttons {
+    position: fixed;
+    bottom: 30px;
+    left: 15px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.whatsapp-btn, .call-btn {
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.whatsapp-btn {
+    background: var(--whatsapp-color);
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+.call-btn {
+    background: var(--main-color);
+    box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+}
+
+.whatsapp-btn:hover, .call-btn:hover {
+    transform: scale(1.05) rotate(-3deg);
+}
+
+/* الهيدر */
+header {
+    background: linear-gradient(135deg, var(--main-color), var(--secondary-color));
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    transition: all 0.3s;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 1rem;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s;
+}
+
+header nav a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+/* القسم البطولي */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1556911220-bff31c812dba') center/cover;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    animation: zoomIn 1s ease-in;
+}
+
+/* قسم الميزات */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 4rem 2rem;
+    background: #f8fff9;
+}
+
+.feature-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.feature-box:hover {
+    transform: translateY(-10px);
+}
+
+/* قسم الخدمات */
+.services-section {
+    padding: 4rem 2rem;
+    background: linear-gradient(45deg, #e8f5e9, #f8fff9);
+}
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.service-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.service-card:hover {
+    transform: scale(1.02);
+}
+
+/* قسم المعرض */
+.gallery {
+    padding: 4rem 2rem;
+    background: #f8f9fa;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    transform-style: preserve-3d;
+}
+
+.gallery-item:hover {
+    transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.gallery-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(46, 204, 113, 0.3), rgba(52, 152, 219, 0.3));
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.gallery-item:hover::before {
+    opacity: 1;
+}
+
+.gallery-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    transition: transform 0.4s;
+}
+
+.gallery-item:hover .gallery-img {
+    transform: scale(1.05);
+}
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox-img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(255,255,255,0.2);
+}
+
+.close-btn {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.close-btn:hover {
+    transform: rotate(90deg);
+}
+
+/* قسم الاتصال */
+.contact-section {
+    padding: 4rem 2rem;
+    background: linear-gradient(45deg, #e8f5e9, #f8fff9);
+}
+
+.contact-form {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(46, 204, 113, 0.1);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    margin-left:1rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.form-input:focus {
+    border-color: var(--main-color);
+    box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);
+}
+
+.submit-btn {
+    background: var(--main-color);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 auto;
+}
+
+.submit-btn:hover {
+    background: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+/* حقوق النشر */
+.copyright {
+    text-align: center;
+    padding: 2rem;
+    background: var(--text-color);
+    color: white;
+}
+
+/* الأنيميشنز */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes zoomIn {
+    from { transform: scale(1.1); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* الاستجابة للجوال */
+@media (max-width: 768px) {
+    header nav {
+        display: none;
+    }
+
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+
+    .gallery-img {
+        height: 300px;
+    }
+}
+
+    </style>    
+</head>
+<body>
+    <!-- الأزرار الثابتة -->
+    <div class="fixed-buttons">
+        <a href="https://wa.me/+2001029046651" class="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+            واتساب الآن
+        </a>
+        <a href="tel:+201029046651" class="call-btn">
+            <i class="fas fa-phone"></i>
+            اتصل مباشرة
+        </a>
+    </div>
+
+    <!-- الهيدر -->
+    <header id="header">
+        <h1>شركة النخيل لنقل العفش</h1>
+        <nav>
+            <a href="#about">عن الشركة</a>
+            <a href="#services">خدماتنا</a>
+            <a href="#contact">اتصل بنا</a>
+        </nav>
+    </header>
+
+    <!-- القسم البطولي -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2 style="font-size: 2.5rem;">🚚 نقل عفش محترف بلمسة خضراء</h2>
+            <p style="font-size: 1.2rem;">خبرة 15 عامًا في نقل وتخزين العفش بأعلى معايير الجودة</p>
+        </div>
+    </section>
+
+    <!-- قسم الميزات -->
+    <section class="features" id="about">
+        <div class="feature-box">
+            <i class="fas fa-shield-alt fa-3x" style="color: var(--main-color);"></i>
+            <h3>🛡️ ضمان السلامة الكاملة</h3>
+            <p>نستخدم أفضل مواد التغليف والتأمينات</p>
+        </div>
+        <div class="feature-box">
+            <i class="fas fa-clock fa-3x" style="color: var(--main-color);"></i>
+            <h3>⏰ خدمة 24 ساعة</h3>
+            <p>نعمل على مدار الساعة لخدمتكم</p>
+        </div>
+        <div class="feature-box">
+            <i class="fas fa-tools fa-3x" style="color: var(--main-color);"></i>
+            <h3>🔧 فنيون معتمدون</h3>
+            <p>فك وتركيب باحترافية عالية</p>
+        </div>
+    </section>
+
+    <!-- قسم الخدمات -->
+    <section class="services-section" id="services">
+        <h2 style="text-align: center; margin-bottom: 2rem;">📦 خدماتنا المتكاملة</h2>
+        <div class="service-grid">
+            <div class="service-card">
+                <i class="fas fa-truck-moving fa-3x" style="color: var(--main-color);"></i>
+                <h3>نقل منازل كاملة</h3>
+                <p>خدمة نقل متكاملة مع الفك والتركيب</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-warehouse fa-3x" style="color: var(--main-color);"></i>
+                <h3>تخزين آمن</h3>
+                <p>مستودعات مراقبة على مدار الساعة</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-couch fa-3x" style="color: var(--main-color);"></i>
+                <h3>نقل القطع الكبيرة</h3>
+                <p>معدات خاصة للقطع الثقيلة</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المعرض -->
+    <section class="gallery">
+        <h2 style="text-align: center; margin-bottom: 2rem; font-size: 2.5rem; color: var(--text-color);">🎞️ معرض أعمالنا</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="img1.jpg" alt="نقل الأثاث" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img src="img2.jpg" alt="تغليف العفش" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img src="img3.jpg" alt="سيارات النقل" class="gallery-img">
+            </div>
+        </div>
+
+        <!-- Lightbox -->
+        <div class="lightbox">
+            <span class="close-btn">×</span>
+            <img src="" alt="" class="lightbox-img">
+        </div>
+    </section>
+
+    <!-- قسم الاتصال -->
+    <section class="contact-section" id="contact">
+        <h2 style="text-align: center; margin-bottom: 2rem;">📩 تواصل معنا</h2>
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <input type="text" class="form-input" placeholder="الاسم الكامل" required>
+            </div>
+            <div class="form-group">
+                <input type="tel" class="form-input" placeholder="رقم الهاتف" required>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-input" placeholder="البريد الإلكتروني" required>
+            </div>
+            <div class="form-group">
+                <textarea class="form-input" rows="5" placeholder="رسالتك..." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i>
+                إرسال الرسالة
+            </button>
+        </form>
+    </section>
+
+    <!-- حقوق النشر -->
+    <div class="copyright">
+        © 2025 جميع الحقوق محفوظة لشركة النخيل
+        <br>
+        <i class="fas fa-map-marker-alt"></i> الرياض - المملكة العربية السعودية
+    </div>
+
+    <script>
+        // Lightbox functionality
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = document.querySelector('.lightbox-img');
+        const closeBtn = document.querySelector('.close-btn');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgSrc = item.querySelector('img').src;
+                lightboxImg.src = imgSrc;
+                lightbox.classList.add('active');
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if(e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+
+        // تأثيرات التمرير
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.feature-box, .service-card, .testimonial-card, .gallery-item').forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 1.0s ease-out';
+            observer.observe(el);
+        });
+
+        // إرسال النموذج
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: this.querySelector('[type="text"]').value,
+                phone: this.querySelector('[type="tel"]').value,
+                email: this.querySelector('[type="email"]').value,
+                message: this.querySelector('textarea').value
+            };
+
+            const mailtoLink = `mailto:gqikdubrjntorldfieo36@gmail.com?subject=رسالة جديدة من ${formData.name}&body=الاسم: ${formData.name}%0D%0Aالهاتف: ${formData.phone}%0D%0Aالبريد: ${formData.email}%0D%0Aالرسالة: ${formData.message}`;
+            
+            window.location.href = mailtoLink;
+            alert('📨 تم إعداد الرسالة بنجاح! سيتم فتح بريدك الإلكتروني لإرسالها');
+        });
+    </script>
+</body>
+</html>
